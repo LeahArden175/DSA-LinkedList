@@ -163,11 +163,10 @@ class LinkedList {
       return null;
     }
   }
-
 }
 
-//QUESTIONS 2-8 DOWN BELOW
 
+//2. Create a singly linked list
 function main() {
   const SLL = new LinkedList();
 
@@ -192,5 +191,79 @@ function main() {
 
   SLL.display();
 }
-
 main();
+
+// 3. Supplemental functions for a linked list
+
+let emptyList = new LinkedList();
+
+let SLL = new LinkedList();
+SLL.insertLast('Apollo');
+SLL.insertLast('Boomer');
+SLL.insertLast('Hello');
+SLL.insertLast('Husker');
+SLL.insertLast('Starbuck');
+SLL.insertLast('Tauhida');
+SLL.display();
+
+function size(list) {
+  let size = 0;
+  let currentNode = list.head;
+
+  while (currentNode !== null) {
+    size++;
+    currentNode = currentNode.next;
+  }
+  return size;
+}
+console.log(size(SLL))
+
+function isEmpty(list) {
+    if(list.head === null) {
+        return ('the list is empty')
+    } else {
+        return list
+    }
+}
+console.log(isEmpty(emptyList))
+
+function findPrevious(list, item) {
+    if(list.head === null) {
+        return('The list is empty')
+    }
+
+    let currentNode = list.head
+    let previousNode = list.head
+    
+    while(currentNode !== null && currentNode.value !== item) {
+        previousNode = currentNode
+        currentNode = currentNode.next
+    }
+
+    if( currentNode === null) {
+        return('Item not found')
+    }
+
+    return previousNode.value
+}
+
+console.log(findPrevious(SLL, 'Hello'))
+console.log(findPrevious(SLL, 'Starbuck'))
+console.log(findPrevious(SLL, 'Leah'))
+console.log(findPrevious(emptyList, 'Starbuck'))
+
+function findLast(list) {
+    if(list.head === null) {
+        return('The list is empty')
+    }
+
+    let currentNode = list.head
+    
+    while (currentNode.next !== null){
+        currentNode = currentNode.next
+    }
+
+    return currentNode.value
+}
+
+console.log(findLast(SLL))
