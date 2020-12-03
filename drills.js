@@ -36,27 +36,28 @@ class LinkedList {
   }
 
   insertBefore(item, beforeItem) {
-    if (this.head === null) {
+    // if list is empty return null(end)
+    if (!this.head) {
       this.insertFirst(item);
-      return;
     }
-
+    if (this.head === null) {
+      return null;
+    }
+    // loop through the list to find current and previous nodes
+    // if node that has value equal to the target, that node is the current
+    // Node and the one before it is the previous Node
     let currentNode = this.head;
-    let previousNode = this.head;
-
+    let previous = this.head;
     while (currentNode !== null && currentNode.value !== beforeItem) {
-      previousNode = currentNode;
+      previous = currentNode;
       currentNode = currentNode.next;
     }
 
     if (currentNode === null) {
-      this.insertLast(item);
-      return;
+      console.log('fuck the target');
     }
 
-    const tempNode = new _Node(item, currentNode);
-
-    previousNode.next = tempNode;
+    previous.next = new _Node(item, previous.next);
   }
 
   insertAfter(item, afterItem) {
@@ -127,7 +128,7 @@ class LinkedList {
     }
     //if the node to be removed is the head, make the next node head
     if (this.head.value === item) {
-      this.head - this.head.next;
+      this.head  this.head.next;
       return;
     }
     //start at the hed
