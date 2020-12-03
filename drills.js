@@ -267,3 +267,119 @@ function findLast(list) {
 }
 
 console.log(findLast(SLL))
+
+//4. Mystery program
+//Removes duplicates from linked list
+//O(n^k) Polynomial
+//TODO
+function WhatDoesThisProgramDo(lst) {
+    let current = lst.head;
+    while (current !== null) {
+        let newNode = current;
+        while (newNode.next !== null) {
+            if (newNode.next.value === current.value) {
+                newNode.next = newNode.next.next;
+            }
+            else {
+                newNode = newNode.next;
+            }
+        }
+        current = current.next;
+    }
+}
+console.log('before')
+SLL.display()
+WhatDoesThisProgramDo(SLL)
+console.log('after')
+SLL.display()
+
+
+//5. Reverse a list
+
+function reverseList(list) {
+    //A > B > C > null becomes C > B > A > null 
+    let currentNode = list.head // A
+    let previousNode = list.head // A
+    let nextNode = currentNode.next // B
+  
+  while (nextNode !== null){
+      if(currentNode === previousNode) {
+        currentNode.next = null // A > null
+      } else {
+        currentNode.next = previousNode // B > A > null
+      }
+      previousNode = currentNode //prev = B
+      currentNode = nextNode //curr = C
+      nextNode = nextNode.next //next = null
+    }
+  
+    if(nextNode === null) {
+      list.head= currentNode //head > C > B
+      currentNode.next = previousNode
+    }
+    return list
+  }
+  
+  console.log('b e f o r e')
+  SLL.display()
+  reverseList(SLL)
+  console.log('a f t e r')
+  SLL.display()
+
+  //6. 3rd from the end 
+
+  function thirdToLast(list) {
+
+    if(!list.head){
+      return;
+    }
+    let currentNode = list.head
+  
+    while(currentNode.next.next.next !== null) {
+      currentNode = currentNode.next
+    }
+    return currentNode.value
+  }
+  
+  console.log(thirdToLast(SLL))
+
+  //7. Middle of a list
+
+  function findMiddle(list) {
+    if(!list.head){
+      return "the list is empty"
+    }
+  
+    let singleCount = list.head
+    let doubleCount = list.head
+  
+    while(doubleCount.next && doubleCount.next.next) {
+      singleCount = singleCount.next
+      doubleCount = doubleCount.next.next
+      }
+      return singleCount.value
+  }
+  
+  findMiddle(SLL)
+
+  //8. Cycle in a list
+
+  function cycleCheck(list) {
+    //intial slow and fast pointers at head
+    let slow = list.head
+    let fast = list.head
+    //traverse linked list
+    while(fast && fast.next) {
+      //fast moves by two
+      fast = fast.next.next
+      //slow moves by one
+      slow = slow.next
+      //if two pointers meet then there is a cycle
+      if(fast === slow) {
+        return true
+      }
+    }
+    return false
+  }
+  
+  cycleCheck(CycleList)
